@@ -16,3 +16,7 @@ docker-compose down
 
 
 https://github.com/DiUS/java-faker
+
+to remove images
+
+docker rm <<imageid>>

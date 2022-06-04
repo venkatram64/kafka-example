@@ -1,21 +1,9 @@
 package com.venkat.kafka.service;
 
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.common.serialization.LongDeserializer;
-import org.apache.kafka.common.serialization.StringDeserializer;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
-
-import java.time.Duration;
-import java.util.Arrays;
-import java.util.Map;
 
 @Service
 public class MyConsumer {
@@ -33,11 +21,16 @@ public class MyConsumer {
         System.out.println("Consuming message :" + payload);
     }*/
 
-    @KafkaListener(topics={"my-topic"},groupId = "mygroup")
+    /*@KafkaListener(topics={"my-topic"},groupId = "mygroup")
     public void consume(@Payload String payload){
         System.out.println("Consuming message :" + payload);
-    }
+    }*/
 
+    @KafkaListener(topics={"my-topic"},groupId = "mygroup")
+    public void consume(ConsumerRecord<Integer, com.venkat.kafka.ser.MessageQuote> payload){
+        com.venkat.kafka.ser.MessageQuote msg = payload.value();
+        System.out.println("*********Consuming message************ :" + msg);
+    }
 
 
     /*public Map<String, Object> consumerProperties(){
